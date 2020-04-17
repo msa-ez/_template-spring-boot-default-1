@@ -28,6 +28,15 @@ public class {{namePascalCase}} {
         BeanUtils.copyProperties(this, {{nameCamelCase}});
         {{nameCamelCase}}.publish();
 
+        {{#relationCommandInfo}}
+            {{aggregate.aggregateRoot.namePascalCase}}  {{aggregate.nameCamelCase}} = new {{aggregate.namePascalCase}}();
+
+            // mappings goes here
+
+            {{aggregate.nameCamelCase}}Service.{{restRepositoryInfo.method}}{{aggregate.namePascalCase}}({{aggregate.nameCamelCase}});
+
+        {{/relationCommandInfo}}
+
     {{/events}}
     }
 
@@ -52,5 +61,8 @@ public class {{namePascalCase}} {
         this.{{nameCamelCase}} = {{nameCamelCase}};
     }
 {{/aggregateRoot.fieldDescriptors}}
+
+
+
 
 }
