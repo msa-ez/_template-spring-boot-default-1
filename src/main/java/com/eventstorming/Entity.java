@@ -33,7 +33,7 @@ public class {{namePascalCase}} {
 
             // mappings goes here
 
-            {{aggregate.nameCamelCase}}Service.{{restRepositoryInfo.method}}{{aggregate.namePascalCase}}({{aggregate.nameCamelCase}});
+            {{aggregate.nameCamelCase}}Service.{{name}}({{aggregate.nameCamelCase}});
 
         {{/relationCommandInfo}}
 

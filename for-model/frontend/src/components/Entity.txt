@@ -1,0 +1,44 @@
+forEach: Aggregate
+fileName: {{namePascalCase}}.vue
+path: frontend/src/components
+---
+
+<template>
+  <v-form v-model="valid">
+
+{{#aggregateRoot.fieldDescriptors}}
+    
+      <v-text-field
+        v-model="value.{{nameCamelCase}}"
+        :rules="nameRules"
+        :counter="10"
+        label="name"
+        required
+      ></v-text-field>
+
+{{/aggregateRoot.fieldDescriptors}}
+
+  </v-form>
+</template>
+
+<script>
+  export default {
+    name: '{{nameCamelCase}}',
+
+    created: function(){
+    },
+
+    computed: {
+      
+    },
+
+    watch: {
+      
+    },
+
+    data: () => ({
+
+     
+    }),
+  }
+</script>
