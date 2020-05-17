@@ -5,16 +5,24 @@ path: frontend/src/components
 
 <template>
 
-  <{{nameCamelCase}} v-for='(element, index) in elements' @change="update" @remove="remove"></{{nameCamelCase}}>
+  <div>
+    <{{nameCamelCase}} v-bind:key="element.id" v-model="elements[index]" v-for='(element, index) in elements' @change="update" @remove="remove"></{{nameCamelCase}}>
 
-  <h2>Add New {{name}}</h2>
-  <course v-model="newElement" isEditable=true isNew=true @add="add"></course>
+    <h2>Add New {{name}}</h2>
+    <{{nameCamelCase}} v-model="newElement" isEditable=true isNew=true @add="add"></{{nameCamelCase}}>
+  </div>
 
 </template>
 
 <script>
+  import $ from "jquery";
+  import {{nameCamelCase}} from './components/{{namePascalCase}}List';
+
   export default {
-    name: '{{nameCamelCase}}-list',
+    name: '{{nameCamelCase}}List',
+    components: {
+      {{nameCamelCase}}
+    },
 
     data() {
       return {
@@ -45,11 +53,6 @@ path: frontend/src/components
       
     },
 
-    data: () => ({
-
-     
-    }),
-
     methods: {
       update(element){
         $.ajax({
@@ -58,7 +61,7 @@ path: frontend/src/components
           contentType: "application/json",
           data: JSON.stringify(element),
           success:
-            function(result){
+            function(){
              alert('Successfully Updated!');
            },
         })
@@ -88,7 +91,7 @@ path: frontend/src/components
           url: element._links.self.href,
           method: 'DELETE',
           success:
-            function(result){
+            function(){
               var index = me.elements.indexOf(element);
               me.elements.splice(index, 1);
             },

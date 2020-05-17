@@ -23,10 +23,9 @@ path: frontend/src/components
           
             <v-text-field
               v-model="value.{{nameCamelCase}}"
-              :rules="nameRules"
               :counter="10"
-              label="name"
-              required
+              label="{{name}}"
+              readyonly="!isEditable"
             ></v-text-field>
 
         {{/aggregateRoot.fieldDescriptors}}

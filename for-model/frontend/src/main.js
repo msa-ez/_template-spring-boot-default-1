@@ -3,6 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 
 import Mustache from 'mustache';
+import $ from "jquery";
 
 console.log(Mustache);
 
