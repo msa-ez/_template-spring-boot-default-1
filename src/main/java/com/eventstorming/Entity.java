@@ -22,35 +22,29 @@ public class {{namePascalCase}} {
 
 {{#lifeCycles}}
     {{annotation}}
-    public void when_{{trigger}}_publishEvent(){
+    public void on{{trigger}}(){
     {{#events}}
         {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
         BeanUtils.copyProperties(this, {{nameCamelCase}});
-        {{nameCamelCase}}.publish();
+        {{nameCamelCase}}.publishAfterCommit();
 
         {{#relationCommandInfo}}
-            {{aggregate.aggregateRoot.namePascalCase}}  {{aggregate.nameCamelCase}} = new {{aggregate.namePascalCase}}();
+        {{#commandValue}}
+        //Following code causes dependency to external APIs
+        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
-            // mappings goes here
+        {{options.package}}.external.{{aggregate.namePascalCase}} {{aggregate.nameCamelCase}} = new {{options.package}}.external.{{aggregate.namePascalCase}}();
+        // mappings goes here
+        Application.applicationContext.getBean({{options.package}}.external.{{aggregate.namePascalCase}}Service.class)
+            .{{nameCamelCase}}({{aggregate.nameCamelCase}});
 
-            {{aggregate.nameCamelCase}}Service.{{name}}({{aggregate.nameCamelCase}});
-
+        {{/commandValue}}
         {{/relationCommandInfo}}
 
     {{/events}}
     }
 
 {{/lifeCycles}}
-//{{#events}}
-//    {{trigger}}
-//    public void publish{{namePascalCase}}(){
-//
-//        {{namePascalCase}} {{nameCamelCase}} = new {{namePascalCase}}();
-//        BeanUtils.copyProperties(this, {{nameCamelCase}});
-//        {{nameCamelCase}}.publish();
-//
-//    }
-//{{/events}}
 
 {{#aggregateRoot.fieldDescriptors}}
     public {{className}} get{{namePascalCase}}() {
