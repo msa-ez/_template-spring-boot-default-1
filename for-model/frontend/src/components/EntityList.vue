@@ -34,14 +34,23 @@ path: frontend/src/components
     },
     created() {
       var me = this;
-      $.ajax(
-        {
-          url: window.backendHost + '/{{namePlural}}',
-          success: function(result){
-            me.elements = result._embedded.{{namePlural}};
+
+      try{
+        $.ajax(
+          {
+            url: window.withBackend('/{{namePlural}}'),
+            success: function(result){
+              me.elements = result._embedded.{{namePlural}};
+            },
+            fail: function(jqXHR, textStatus, errorThrown){
+              console.log(jqXHR)
+              alert(textStatus+ " : \n" + errorThrown)
+            }
           }
-        }
-      )
+        )
+      }catch(e){
+        alert(e);
+      }
 
     },
 
@@ -54,48 +63,80 @@ path: frontend/src/components
     },
 
     methods: {
+
       update(element){
-        $.ajax({
-          url: element._links.self.href,
-          method: 'PUT',
-          contentType: "application/json",
-          data: JSON.stringify(element),
-          success:
-            function(){
-             alert('Successfully Updated!');
-           },
-        })
+        try{
+          $.ajax({
+            url: window.withBackend(element._links.self.href),
+            method: 'PUT',
+            contentType: "application/json",
+            data: JSON.stringify(element),
+            success:
+              function(){
+              alert('Successfully Updated!');
+            },
+            fail: function(jqXHR, textStatus, errorThrown){
+              console.log(jqXHR)
+              alert(textStatus+ " : \n" + errorThrown)
+            }
+          })
+        }catch(e){
+          alert(e);
+        }
+
       },
 
        add(element){
           var me = this;
-          $.ajax({
-            url: window.backendHost + "/{{namePlural}}",
-            method: 'POST',
-            contentType: "application/json",
-            data: JSON.stringify(element),
-            success:
-              function(result){
-               me.courses.push(result);
 
-               me.newElement = {};
+          try{
+            $.ajax({
+              url: window.withBackend("/{{namePlural}}"),
+              method: 'POST',
+              contentType: "application/json",
+              data: JSON.stringify(element),
+              success:
+                function(result){
+                me.elements.push(result);
 
-               alert('Successfully Added!');
-             },
-          })
+                me.newElement = {};
+
+                alert('Successfully Added!');
+              },
+              fail: function(jqXHR, textStatus, errorThrown){
+                console.log(jqXHR)
+                alert(textStatus+ " : \n" + errorThrown)
+              }
+            })
+          }catch(e){
+            alert(e);
+          }
+
        },
 
        remove(element){
         var me = this;
-        $.ajax({
-          url: element._links.self.href,
-          method: 'DELETE',
-          success:
-            function(){
-              var index = me.elements.indexOf(element);
-              me.elements.splice(index, 1);
-            },
-        })
+        
+        try{
+          $.ajax({
+            url: window.withBackend(element._links.self.href),
+            method: 'DELETE',
+            success:
+              function(){
+                var index = me.elements.indexOf(element);
+                me.elements.splice(index, 1);
+              },
+              fail: function(jqXHR, textStatus, errorThrown){
+                console.log(jqXHR)
+                alert(textStatus+ " : \n" + errorThrown)
+              }
+          })
+
+        }catch(e){
+          alert(e);
+        }
+
+
        }
     }
   }

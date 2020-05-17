@@ -45,7 +45,7 @@ path: frontend/src/components
       <v-btn text v-if="!isNew" @click="remove">Delete</v-btn>
     </v-card-actions>
     <v-card-actions v-else>
-      <md-button @click="isEditable = true">Edit</md-button>
+      <v-btn @click="isEditable = true">Edit</v-btn >
     </v-card-actions>
     
   </v-card>
