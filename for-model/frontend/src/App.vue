@@ -46,9 +46,11 @@
 <script>
 
 
-{{#Aggregate}}
+{{#boundedContexts}}
+{{#aggregates}}
 import entity from './components/{{namePascalCase}}';
-{{/Aggregate}}
+{{/aggregates}}
+{{/boundedContexts}}
 
 export default {
   name: 'App',
