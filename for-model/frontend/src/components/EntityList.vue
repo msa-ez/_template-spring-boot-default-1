@@ -75,7 +75,7 @@ path: frontend/src/components
               function(result){
                me.courses.push(result);
 
-               me.newElement = {title: 'New Course'};
+               me.newElement = {};
 
                alert('Successfully Added!');
              },

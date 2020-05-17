@@ -44,7 +44,11 @@
 </template>
 
 <script>
-import entity from './components/Entity';
+
+
+{{#Aggregate}}
+import entity from './components/{{namePascalCase}}';
+{{/Aggregate}}
 
 export default {
   name: 'App',
