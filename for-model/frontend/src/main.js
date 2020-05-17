@@ -3,11 +3,11 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 
 import Mustache from 'mustache';
-import $ from "jquery";
+
 
 console.log(Mustache);
 
-window.Mustache = Mustache;
+window.backendHost = "http://localhost:8088"
 
 Vue.config.productionTip = false
 

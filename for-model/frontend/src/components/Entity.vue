@@ -58,8 +58,8 @@ path: frontend/src/components
 
     props: {
       value: Object,
-      isEditable: false,
-      isNew: false
+      isEditable: Boolean,
+      isNew: Boolean
     },
     
     created: function(){

@@ -16,7 +16,7 @@ path: frontend/src/components
 
 <script>
   import $ from "jquery";
-  import {{nameCamelCase}} from './components/{{namePascalCase}}List';
+  import {{nameCamelCase}} from './{{namePascalCase}}';
 
   export default {
     name: '{{nameCamelCase}}List',
