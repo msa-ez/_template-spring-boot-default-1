@@ -38,7 +38,7 @@ path: frontend/src/components
       try{
         $.ajax(
           {
-            url: window.withBackend('/{{namePlural}}'),
+            url: window.backendHost + ":" + window.backendPort + '/{{namePlural}}',
             success: function(result){
               me.elements = result._embedded.{{namePlural}};
             },
@@ -116,7 +116,7 @@ path: frontend/src/components
 
        remove(element){
         var me = this;
-        
+
         try{
           $.ajax({
             url: window.withBackend(element._links.self.href),

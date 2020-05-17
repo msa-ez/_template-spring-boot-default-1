@@ -2,7 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
 
-window.backendHost = "http://localhost:8088"
+/**    change this host and port    */
+window.backendHost = "localhost"
+window.backendPort = "8088"
 
 Vue.config.productionTip = false
 
@@ -17,9 +19,8 @@ window.withBackend = function(oldUrl){
 
   var url = new URL(oldUrl);
 
-  /**    change this host and port    */
-  url.hostname = 'localhost';
-  url.port = 8088;
+  url.hostname = window.backendHost;
+  url.port = window.backendPort;
 
   return url.href 
 
