@@ -48,7 +48,7 @@
 
 {{#boundedContexts}}
 {{#aggregates}}
-import entity from './components/{{namePascalCase}}';
+import {{namePascalCase}} from './components/{{namePascalCase}}';
 {{/aggregates}}
 {{/boundedContexts}}
 
@@ -56,7 +56,11 @@ export default {
   name: 'App',
 
   components: {
-    entity,
+{{#boundedContexts}}
+{{#aggregates}}
+    {{namePascalCase}},
+{{/aggregates}}
+{{/boundedContexts}}
   },
 
   data: () => ({
